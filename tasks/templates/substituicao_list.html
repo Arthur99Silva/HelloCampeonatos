@@ -1,0 +1,38 @@
+<!-- substituicao_list.html -->
+{% extends 'menu.html' %}
+
+{% block content %}
+  <main class="container mt-5">
+    <h1 class="text-center">Lista de Substituições</h1>
+
+    <table class="table mt-3">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Saindo Jogador</th>
+          <th>Entrando Jogador</th>
+          <th>Minuto da Partida</th>
+          <th>Partida</th>
+          <th>Ações<th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for substituicao in substituicao_list %}
+          <tr>
+            <td>{{ substituicao.id }}</td>
+            <td>{{ substituicao.saindo_jogador_id.nome }}</td>
+            <td>{{ substituicao.entrando_jogador_id.nome }}</td>
+            <td>{{ substituicao.min_partida }}</td>
+            <td>{{ substituicao.partida_id }}</td>
+            {% if user.is_authenticated %}
+              <td>
+                <a href="{% url 'editar_substituicao' substituicao.id %}">Editar</a> |
+                <a href="{% url 'excluir_substituicao' substituicao.id %}">Excluir</a>
+              </td>
+            {% endif %}
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </main>
+{% endblock %}

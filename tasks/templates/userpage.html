@@ -1,0 +1,582 @@
+{% extends 'menu.html' %}
+
+{% block content %}
+  <!DOCTYPE html>
+  <html lang="en">
+    <head>
+      <meta charset="UTF-8" />
+      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" />
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    </head>
+    <body>
+      <main class="container mt-5">
+        <!-- Adiciona espaço acima do formulário -->
+        <div class="row">
+          <div class="col-md-5 offset-md-3">
+            <form method="POST" class="card card-body">
+              {{ error }}
+
+              {% csrf_token %}
+
+              <h1 class="text-center">Menu de Cadastro</h1>
+              <br />
+              <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#tecnicoModal">Registrar Técnico</button>
+              <br />
+              <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#equipeModal">Registrar Equipe</button>
+              <br />
+              <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#estadioModal">Registrar Estádio</button>
+              <br />
+              <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#campeonatoModal">Registrar Campeonato</button>
+              <br />
+              <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#jogadorModal">Registrar Jogador</button>
+              <br />
+              <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#desempenhoModal">Registrar Desempenho</button>
+              <br />
+              <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#partidaModal">Registrar Partida</button>
+              <br />
+              <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#escalacaoModal">Registrar Escalação</button>
+              <br />
+              <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#substituicaoModal">Registrar Substituições</button>
+
+            </form>
+
+            <!-- Modal Registrar Técnico -->
+            <div id="tecnicoModal" class="modal fade" role="dialog">
+              <div class="modal-dialog">
+                <!-- Modal content -->
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h4 class="modal-title">Cadastrar Técnico</h4>
+                  </div>
+                  <div class="modal-body">
+                    <form method="POST" action="{% url 'tecnico' %}" class="card card-body">
+                      {% csrf_token %}
+
+                      <h1 class="text-center">Cadastrar Técnico</h1>
+                      <br />
+
+                      <label for="nome" class="form-label">Nome:</label>
+                      <input type="text" class="form-control" name="nome" id="nome" />
+                      <br />
+
+                      <label for="nacionalidade" class="form-label">Nacionalidade:</label>
+                      <input type="text" class="form-control" name="nacionalidade" id="nacionalidade" />
+                      <br />
+
+                      <label for="naturalidade" class="form-label">Naturalidade:</label>
+                      <input type="text" class="form-control" name="naturalidade" id="naturalidade" />
+                      <br />
+
+                      <div class="col-md-11 text-center">
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+                        <button type="submit" class="btn btn-primary">Confirmar</button>
+                      </div>
+                    </form>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- Modal Registrar Técnico -->
+
+            <!-- Modal Registrar Equipes -->
+            <div id="equipeModal" class="modal fade" role="dialog">
+              <div class="modal-dialog">
+                <!-- Modal content -->
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h4 class="modal-title">Registrar Equipes</h4>
+                  </div>
+                  <div class="modal-body">
+                    <form method="POST" action="{% url 'equipe' %}" class="card card-body">
+                      {% csrf_token %}
+
+                      <h1 class="text-center">Cadastro de Equipe</h1>
+                      <br />
+
+                      <label for="nome" class="form-label">Nome:</label>
+                      <input type="text" class="form-control" name="nome" id="nome" />
+                      <br />
+
+                      <label for="sigla" class="form-label">Sigla:</label>
+                      <input type="text" class="form-control" name="sigla" id="sigla" />
+                      <br />
+
+                      <label for="cidade" class="form-label">Cidade:</label>
+                      <input type="text" class="form-control" name="cidade" id="cidade" />
+                      <br />
+
+                      <label for="estado" class="form-label">Estado:</label>
+                      <input type="text" class="form-control" name="estado" id="estado" />
+                      <br />
+                      <label for="estadio" class="form-label">Estádio:</label>
+                      {{ form.estadio }}
+                      <br />
+                      <br />
+                      <label for="tecnico" class="form-label">Técnico:</label>
+                      {{ form.tecnico }}
+                      <br />
+                      <div class="col-md-11 text-center">
+                        <button type="button" name="cancel_equipe" class="btn btn-danger" onclick="window.location.href='{% url 'userpage' %}'">Cancelar</button>
+                        <button type="submit" name="submit_equipe" class="btn btn-primary">Confirmar</button>
+                      </div>
+                    </form>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Modal Registrar Estádio -->
+            <div id="estadioModal" class="modal fade" role="dialog">
+              <div class="modal-dialog">
+                <!-- Modal content -->
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h4 class="modal-title">Registrar Estádio</h4>
+                  </div>
+                  <div class="modal-body">
+                    <form method="POST" action="{% url 'estadio' %}" class="card card-body">
+                      {% csrf_token %}
+
+                      <h1 class="text-center">Cadastro de Estádio</h1>
+                      <br />
+
+                      <label for="nome_estadio" class="form-label">Nome do Estádio:</label>
+                      <input type="text" class="form-control" name="nome_estadio" id="nome_estadio" />
+                      <br />
+
+                      <label for="pais" class="form-label">País:</label>
+                      <input type="text" class="form-control" name="pais" id="pais" />
+                      <br />
+
+                      <label for="estado" class="form-label">Estado:</label>
+                      <input type="text" class="form-control" name="estado" id="estado" />
+                      <br />
+
+                      <label for="cidade" class="form-label">Cidade:</label>
+                      <input type="text" class="form-control" name="cidade" id="cidade" />
+                      <br />
+
+                      <label for="capacidade" class="form-label">Capacidade:</label>
+                      <input type="number" class="form-control" name="capacidade" id="capacidade" />
+                      <br />
+
+                      <div class="col-md-11 text-center">
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+                        <button type="submit" class="btn btn-primary">Confirmar</button>
+                      </div>
+                    </form>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- Modal Registrar Estádio -->
+
+            <!-- Modal Registrar Campeonato -->
+            <div id="campeonatoModal" class="modal fade" role="dialog">
+              <div class="modal-dialog">
+                <!-- Modal content -->
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h4 class="modal-title">Cadastrar Campeonato</h4>
+                  </div>
+                  <div class="modal-body">
+                    <form method="POST" action="{% url 'campeonato' %}" class="card card-body">
+                      {% csrf_token %}
+
+                      <h1 class="text-center">Cadastrar Campeonato</h1>
+                      <br />
+
+                      <label for="nome" class="form-label">Nome:</label>
+                      <input type="text" class="form-control" name="nome" id="nome" />
+                      <br />
+
+                      <label for="ano" class="form-label">Ano:</label>
+                      <input type="number" class="form-control" name="ano" id="ano" />
+                      <br />
+
+                      <label for="serie" class="form-label">Série:</label>
+                      <input type="text" class="form-control" name="serie" id="serie" />
+                      <br />
+
+                      <div class="col-md-11 text-center">
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+                        <button type="submit" class="btn btn-primary">Confirmar</button>
+                      </div>
+                    </form>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- Modal Registrar Campeonato -->
+
+            <!-- Modal Registrar Jogador -->
+            <div id="jogadorModal" class="modal fade" role="dialog">
+              <div class="modal-dialog">
+                <!-- Modal content -->
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h4 class="modal-title">Cadastrar</h4>
+                  </div>
+                  <div class="modal-body">
+                    <form method="POST" action="{% url 'jogador' %}" class="card card-body">
+                      {% csrf_token %}
+
+                      <h1 class="text-center">Cadastrar Jogador</h1>
+                      <br />
+
+                      <label for="nome" class="form-label">Nome:</label>
+                      <input type="text" class="form-control" name="nome" id="nome" />
+                      <br />
+
+                      <label for="num_camisa" class="form-label">Número da Camisa:</label>
+                      <input type="number" class="form-control" name="num_camisa" id="num_camisa" />
+                      <br />
+
+                      <label for="idade" class="form-label">Idade:</label>
+                      <input type="number" class="form-control" name="idade" id="idade" />
+                      <br />
+
+                      <label for="equipe" class="form-label">Equipe:</label>
+                      <select class="form-control" name="equipe" id="equipe">
+                        {% for equipe in equipes %}
+                          <option value="{{ equipe }}">{{ equipe.nome }}</option>
+                        {% endfor %}
+                      </select>
+                      <br />
+                      <!-- 
+                      <label for="equipe" class="form-label">Equipe:</label>
+                      {{ form.estadio_id }}
+                      <br /> -->
+                      <label for="posicao" class="form-label">Posicao:</label>
+                      <select name="posicao" >
+                        <option>Centroavante</option>
+                        <option>Meia Atacante</option>
+                        <option>Avançado Direito</option>
+                        <option>Meio de Campo Central</option>
+                        <option>Meia Esquerda</option>
+                        <option>Lateral Esquerdo</option>
+                        <option>Zagueiro Central</option>
+                        <option>Lateral Direito</option>
+                        <option>Goleiro</option>
+                        <option>Volante</option>
+                        <option>Avançado Esquerdo</option>
+                      </select>
+                      <br />
+
+                      <div class="col-md-11 text-center">
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+                        <button type="submit" class="btn btn-primary">Confirmar</button>
+                      </div>
+                    </form>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- Modal Registrar Jogador -->
+
+            <!-- Modal Registrar Desempenho -->
+            <div id="desempenhoModal" class="modal fade" role="dialog">
+              <div class="modal-dialog">
+                <!-- Modal content -->
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h4 class="modal-title">Registrar Desempenho</h4>
+                  </div>
+                  <div class="modal-body">
+                    <form method="POST" action="{% url 'desempenho' %}" class="card card-body">
+                      {% csrf_token %}
+
+                      <h1 class="text-center">Registro de Desempenho</h1>
+                      <br />
+
+                      <label for="jogador" class="form-label">Jogador:</label>
+                      <select class="form-control" name="jogador" id="jogador">
+                        {% for jogador in jogadores %}
+                          <option value="{{ jogador.id }}">{{ jogador.nome }}</option>
+                        {% endfor %}
+                      </select>
+                      <br />
+
+                      <label for="partida" class="form-label">Partida:</label>
+                      <select class="form-control" name="partida" id="partida">
+                        {% for partida in partidas %}
+                          <option value="{{ partida.id }}">{{ partida.nome }}</option>
+                        {% endfor %}
+                      </select>
+                      <br />
+
+                      <label for="gols" class="form-label">Gols:</label>
+                      <input type="number" class="form-control" name="gols" id="gols" />
+                      <br />
+
+                      <label for="cartao_amarelo" class="form-label">Cartão Amarelo:</label>
+                      <input type="number" class="form-control" name="cartao_amarelo" id="cartao_amarelo" />
+                      <br />
+
+                      <label for="cartao_vermelho" class="form-label">Cartão Vermelho:</label>
+                      <input type="number" class="form-control" name="cartao_vermelho" id="cartao_vermelho" />
+                      <br />
+
+                      <label for="faltas_cometidas" class="form-label">Faltas Cometidas:</label>
+                      <input type="number" class="form-control" name="faltas_cometidas" id="faltas_cometidas" />
+                      <br />
+
+                      <label for="faltas_recebidas" class="form-label">Faltas Recebidas:</label>
+                      <input type="number" class="form-control" name="faltas_recebidas" id="faltas_recebidas" />
+                      <br />
+
+                      <label for="defesas" class="form-label">Defesas:</label>
+                      <input type="number" class="form-control" name="defesas" id="defesas" />
+                      <br />
+
+                      <label for="chutes_a_gol" class="form-label">Chutes a Gol:</label>
+                      <input type="number" class="form-control" name="chutes_a_gol" id="chutes_a_gol" />
+                      <br />
+
+                      <div class="col-md-11 text-center">
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+                        <button type="submit" class="btn btn-primary">Confirmar</button>
+                      </div>
+                    </form>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- Modal Registrar Desempenho -->
+
+            <!-- Modal Registrar Partida -->
+            <div id="partidaModal" class="modal fade" role="dialog">
+              <div class="modal-dialog">
+                <!-- Modal content -->
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h4 class="modal-title">Registrar Partida</h4>
+                  </div>
+                  <div class="modal-body">
+                    <form method="POST" action="{% url 'partida' %}" class="card card-body">
+                      {% csrf_token %}
+
+                      <h1 class="text-center">Cadastro de Partida</h1>
+                      <br />
+
+                      <label for="data" class="form-label">Data:</label>
+                      <input type="date" class="form-control" name="data" id="data" />
+                      <br />
+
+                      <label for="hora" class="form-label">Hora:</label>
+                      <input type="time" class="form-control" name="hora" id="hora" />
+                      <br />
+
+                      <label for="placar_casa" class="form-label">Placar Casa:</label>
+                      <input type="number" class="form-control" name="placar_casa" id="placar_casa" />
+                      <br />
+
+                      <label for="placar_visitante" class="form-label">Placar Visitante:</label>
+                      <input type="number" class="form-control" name="placar_visitante" id="placar_visitante" />
+                      <br />
+
+                      <label for="arbitro" class="form-label">Árbitro:</label>
+                      <input type="text" class="form-control" name="arbitro" id="arbitro" />
+                      <br />
+
+                      <label for="qtd_publico" class="form-label">Quantidade de Público:</label>
+                      <input type="number" class="form-control" name="qtd_publico" id="qtd_publico" />
+                      <br />
+
+                      <label for="status" class="form-label">Status:</label>
+                      <select class="form-control" name="status" id="status">
+                        <option value="Andamento">Andamento</option>
+                        <option value="Não Iniciado">Não Iniciado</option>
+                        <option value="Finalizado">Finalizado</option>
+                      </select>
+                      <br />
+
+                      <label for="rodada" class="form-label">Rodada:</label>
+                      <input type="number" class="form-control" name="rodada" id="rodada" />
+                      <br />
+
+                      <label for="turno" class="form-label">Turno:</label>
+                      <input type="number" class="form-control" name="turno" id="turno" />
+                      <br />
+
+                      <label for="campeonato" class="form-label">Campeonato:</label>
+                      <select class="form-control" name="campeonato" id="campeonato">
+                        {% for campeonato in campeonatos %}
+                          <option value="{{ campeonato.id }}">{{ campeonato.nome }}</option>
+                        {% endfor %}
+                      </select>
+                      <br />
+
+                      <label for="equipe_casa" class="form-label">Equipe Casa:</label>
+                      <select class="form-control" name="equipe_casa" id="equipe_casa">
+                        {% for equipe in equipes %}
+                          <option value="{{ equipe.id }}">{{ equipe.nome }}</option>
+                        {% endfor %}
+                      </select>
+                      <br />
+
+                      <label for="equipe_visitante" class="form-label">Equipe Visitante:</label>
+                      <select class="form-control" name="equipe_visitante" id="equipe_visitante">
+                        {% for equipe in equipes %}
+                          <option value="{{ equipe.id }}">{{ equipe.nome }}</option>
+                        {% endfor %}
+                      </select>
+                      <br />
+
+                      <label for="estadio" class="form-label">Estádio:</label>
+                      <select class="form-control" name="estadio" id="estadio">
+                        {% for estadio in estadios %}
+                          <option value="{{ estadio.id }}">{{ estadio.nome }}</option>
+                        {% endfor %}
+                      </select>
+                      <br />
+
+                      <div class="col-md-11 text-center">
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+                        <button type="submit" class="btn btn-primary">Confirmar</button>
+                      </div>
+                    </form>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- Modal Registrar Partida -->
+
+            <!-- Modal Registrar Escalacao -->
+            <div id="escalacaoModal" class="modal fade" role="dialog">
+              <div class="modal-dialog">
+                <!-- Modal content -->
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h4 class="modal-title">Registrar Escalação</h4>
+                  </div>
+                  <div class="modal-body">
+                    <form method="POST" action="{% url 'escalacao' %}" class="card card-body">
+                      {% csrf_token %}
+
+                      <h1 class="text-center">Cadastro de Escalação</h1>
+                      <br />
+
+                      <label for="jogador" class="form-label">Jogador:</label>
+                      <select class="form-control" name="jogador" id="jogador">
+                        {% for jogador in jogadores %}
+                          <option value="{{ jogador.id }}">{{ jogador.nome }}</option>
+                        {% endfor %}
+                      </select>
+                      <br />
+
+                      <label for="partida" class="form-label">Partida:</label>
+                      <select class="form-control" name="partida" id="partida">
+                        {% for partida in partidas %}
+                          <option value="{{ partida.id }}">{{ partida.id }}</option>
+                        {% endfor %}
+                      </select>
+                      <br />
+
+                      <label for="titular" class="form-label">Titular:</label>
+                      <select class="form-control" name="titular" id="titular">
+                        <option value="1">Sim</option>
+                        <option value="0">Não</option>
+                      </select>
+                      <br />
+
+                      <div class="col-md-11 text-center">
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+                        <button type="submit" class="btn btn-primary">Confirmar</button>
+                      </div>
+                    </form>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- Modal Registrar Escalacao -->
+
+            <!-- Modal Registrar Substituicao -->
+            <div id="substituicaoModal" class="modal fade" role="dialog">
+              <div class="modal-dialog">
+                <!-- Modal content -->
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h4 class="modal-title">Registrar Substituição</h4>
+                  </div>
+                  <div class="modal-body">
+                    <form method="POST" action="{% url 'substituicao' %}" class="card card-body">
+                      {% csrf_token %}
+
+                      <h1 class="text-center">Cadastro de Substituição</h1>
+                      <br />
+
+                      <label for="saindo_jogador" class="form-label">Jogador saindo:</label>
+                      <select class="form-control" name="saindo_jogador" id="saindo_jogador">
+                        {% for jogador in jogadores %}
+                          <option value="{{ jogador.id }}">{{ jogador.nome }}</option>
+                        {% endfor %}
+                      </select>
+                      <br />
+
+                      <label for="entrando_jogador" class="form-label">Jogador entrando:</label>
+                      <select class="form-control" name="entrando_jogador" id="entrando_jogador">
+                        {% for jogador in jogadores %}
+                          <option value="{{ jogador.id }}">{{ jogador.nome }}</option>
+                        {% endfor %}
+                      </select>
+                      <br />
+
+                      <label for="min_partida" class="form-label">Minuto da partida:</label>
+                      <input type="number" class="form-control" name="min_partida" id="min_partida" />
+                      <br />
+
+                      <label for="partida" class="form-label">Partida:</label>
+                      <select class="form-control" name="partida" id="partida">
+                        {% for partida in partidas %}
+                          <option value="{{ partida.id }}">{{ partida.id }}</option>
+                        {% endfor %}
+                      </select>
+                      <br />
+
+                      <div class="col-md-11 text-center">
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+                        <button type="submit" class="btn btn-primary">Confirmar</button>
+                      </div>
+                    </form>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- Modal Registrar Substituicao -->
+
+          </div>
+        </div>
+      </main>
+    </body>
+  </html>
+{% endblock %}

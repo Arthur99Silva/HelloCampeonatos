@@ -1,0 +1,49 @@
+{% extends 'menu.html' %}
+
+{% block content %}
+  <main class="container mt-5">
+    <h1 class="text-center">Lista de Registros de Desempenho</h1>
+
+    <table class="table mt-3">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Jogador</th>
+          <th>Partida</th>
+          <th>Gols</th>
+          <th>Cartão Amarelo</th>
+          <th>Cartão Vermelho</th>
+          <th>Faltas Cometidas</th>
+          <th>Faltas Recebidas</th>
+          <th>Defesas</th>
+          <th>Chutes a Gol</th>
+          {% if user.is_authenticated %}
+          <th>Ações<th>
+            {% endif %}
+        </tr>
+      </thead>
+      <tbody>
+        {% for desempenho in desempenho_list %}
+          <tr>
+            <td>{{ desempenho.id }}</td>
+            <td>{{ desempenho.jogador_id.nome }}</td>
+            <td>{{ desempenho.partida_id }}</td>
+            <td>{{ desempenho.gols }}</td>
+            <td>{{ desempenho.cartao_amarelo }}</td>
+            <td>{{ desempenho.cartao_vermelho }}</td>
+            <td>{{ desempenho.faltas_cometidas }}</td>
+            <td>{{ desempenho.faltas_recebidas }}</td>
+            <td>{{ desempenho.defesas }}</td>
+            <td>{{ desempenho.chutes_a_gol }}</td>
+            {% if user.is_authenticated %}
+              <td>
+                <a href="{% url 'editar_desempenho' desempenho.id %}">Editar</a> |
+                <a href="{% url 'excluir_desempenho' desempenho.id %}">Excluir</a>
+              </td>
+            {% endif %}
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </main>
+{% endblock %}

@@ -1,0 +1,16 @@
+<!-- editar_campeonato.html -->
+{% extends 'menu.html' %}
+
+{% block content %}
+  <main class="container mt-5">
+    <h1 class="text-center">Editar Campeonato</h1>
+
+    <form method="POST" class="mt-3">
+      {% csrf_token %}
+      {{ form.as_p }}
+      <button type="submit" class="btn btn-primary">Salvar</button>
+    </form>
+    
+    <a href="{% url 'campeonato_list' %}">Voltar para a Lista de Campeonatos</a>
+  </main>
+{% endblock %}

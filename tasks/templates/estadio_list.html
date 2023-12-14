@@ -1,0 +1,41 @@
+{% extends 'home.html' %}
+
+{% block content %}
+  <main class="container mt-5">
+    <h1 class="text-center">Lista de Estádios</h1>
+
+    <table class="table mt-3">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Nome</th>
+          <th>País</th>
+          <th>Estado</th>
+          <th>Cidade</th>
+          <th>Capacidade</th>
+          {% if user.is_authenticated %}
+          <th>Ações<th>
+            {% endif %}
+        </tr>
+      </thead>
+      <tbody>
+        {% for estadio in estadio_list %}
+          <tr>
+            <td>{{ estadio.id }}</td>
+            <td>{{ estadio.nome_estadio }}</td>
+            <td>{{ estadio.pais }}</td>
+            <td>{{ estadio.estado }}</td>
+            <td>{{ estadio.cidade }}</td>
+            <td>{{ estadio.capacidade }}</td>
+            {% if user.is_authenticated %}
+              <td>
+                <a href="{% url 'editar_estadio' estadio.id %}">Editar</a> |
+                <a href="{% url 'excluir_estadio' estadio.id %}">Excluir</a>
+              </td>
+            {% endif %}
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </main>
+{% endblock %}

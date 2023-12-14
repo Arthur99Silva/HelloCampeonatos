@@ -1,0 +1,35 @@
+{% extends 'menu.html' %}
+
+{% block content %}
+  <main class="container mt-5">
+    <h1 class="text-center">Lista de Registros de Escalação</h1>
+
+    <table class="table mt-3">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Jogador</th>
+          <th>Partida</th>
+          <th>Titular</th>
+          <th>Ações<th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for escalacao in escalacao_list %}
+          <tr>
+            <td>{{ escalacao.id }}</td>
+            <td>{{ escalacao.jogador.nome }}</td>
+            <td>{{ escalacao.partida.id }}</td>
+            <td>{{ escalacao.titular }}</td>
+            {% if user.is_authenticated %}
+              <td>
+                <a href="{% url 'editar_escalacao' escalacao.id %}">Editar</a> |
+                <a href="{% url 'excluir_escalacao' escalacao.id %}">Excluir</a>
+              </td>
+            {% endif %}
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </main>
+{% endblock %}

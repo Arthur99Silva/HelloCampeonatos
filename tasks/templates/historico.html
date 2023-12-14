@@ -1,0 +1,38 @@
+{% extends 'menu.html' %}
+
+{% block content %}
+  <main class="container mt-5">
+    <!-- Adiciona espaço acima do formulário -->
+    <div class="row">
+      <div class="col-md-5 offset-md-3">
+        <form method="POST" class="card card-body">
+          {{ error }}
+
+          {% csrf_token %}
+
+          <h1 class="text-center">Histórico Completo</h1>
+          <br />
+          <button class="btn btn-primary" type="submit" name="equipe_list">Equipes</button>
+          <br />
+          <button class="btn btn-primary" type="submit" name="tecnico_list">Técnicos</button>
+          <br />
+          <button class="btn btn-primary" type="submit" name="estadio_list">Estadios</button>
+          <br />
+          <button class="btn btn-primary" type="submit" name="campeonato_list">Campeonatos</button>
+          <br />
+          <button class="btn btn-primary" type="submit" name="jogador_list">Jogadores</button>
+          <br />
+          <button class="btn btn-primary" type="submit" name="desempenho_list">Desempenhos</button>
+          <br />
+          <button class="btn btn-primary" type="submit" name="partida_list">Partidas</button>
+          <br />
+          <button class="btn btn-primary" type="submit" name="escalacao_list">Escalações</button>
+          <br />
+          <button class="btn btn-primary" type="submit" name="substituicao_list">Substituições</button>
+
+        </form>
+      </div>
+    </div>
+  </main>
+{% endblock %}
+

@@ -1,0 +1,16 @@
+<!-- editar_estadio.html -->
+{% extends 'menu.html' %}
+
+{% block content %}
+  <main class="container mt-5">
+    <h1 class="text-center">Editar Estádio</h1>
+
+    <form method="POST" class="mt-3">
+      {% csrf_token %}
+      {{ form.as_p }}
+      <button type="submit" class="btn btn-primary">Salvar</button>
+    </form>
+    
+    <a href="{% url 'estadio_list' %}">Voltar para a Lista de Estádios</a>
+  </main>
+{% endblock %}

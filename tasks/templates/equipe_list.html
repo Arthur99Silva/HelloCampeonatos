@@ -1,0 +1,55 @@
+{% extends 'menu.html' %}
+
+{% block content %}
+  <main class="container mt-5">
+    <h1 class="text-center">Lista de Registros de Equipes</h1>
+
+    <table class="table mt-3">
+      <thead>
+        <tr>
+          <th>id</th>
+          <th>nome</th>
+          <th>sigla</th>
+          <th>cidade</th>
+          <th>estado</th>
+          {% if user.is_authenticated %}
+          <th>ID Técnico</th>
+          {% endif %}
+          <th>Nome Técnico</th>
+          {% if user.is_authenticated %}
+          <th>ID Estádio</th>
+          {% endif %}
+          <th>Nome Estádio</th>
+          {% if user.is_authenticated %}
+          <th>Ações<th>
+          {% endif %}
+        </tr>
+      </thead>
+      <tbody>
+        {% for equipe in equipe_list %}
+          <tr>
+            <td>{{ equipe.id }}</td>
+            <td>{{ equipe.nome }}</td>
+            <td>{{ equipe.sigla }}</td>
+            <td>{{ equipe.cidade }}</td>
+            <td>{{ equipe.estado }}</td>
+            {% if user.is_authenticated %}
+            <td>{{ equipe.tecnico.id }}</td>  <!-- Ajuste para exibir o técnico -->
+            {% endif %}
+            <td>{{ equipe.tecnico.nome }}</td>  <!-- Ajuste para exibir o técnico -->
+            {% if user.is_authenticated %}
+            <td>{{ equipe.estadio.id }}</td>  <!-- Ajuste para exibir o estádio -->
+            {% endif %}
+            <td>{{ equipe.estadio.nome_estadio }}</td>  <!-- Ajuste para exibir o estádio -->
+            {% if user.is_authenticated %}
+              <td>
+                <a href="{% url 'editar_equipe' equipe.id %}">Editar</a> |
+                <a href="{% url 'excluir_equipe' equipe.id %}">Excluir</a>
+              </td>
+            {% endif %}
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </main>
+{% endblock %}

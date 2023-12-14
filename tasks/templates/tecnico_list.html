@@ -1,0 +1,37 @@
+{% extends 'home.html' %}
+
+{% block content %}
+  <main class="container mt-5">
+    <h1 class="text-center">Lista de Técnicos</h1>
+
+    <table class="table mt-3">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Nome</th>
+          <th>Nacionalidade</th>
+          <th>Naturalidade</th>
+          {% if user.is_authenticated%}
+            <th>Ações<th>
+          {% endif %}
+        </tr>
+      </thead>
+      <tbody>
+        {% for tecnico in tecnico_list %}
+          <tr>
+            <td>{{ tecnico.id }}</td>
+            <td>{{ tecnico.nome }}</td>
+            <td>{{ tecnico.nacionalidade }}</td>
+            <td>{{ tecnico.naturalidade }}</td>
+            {% if user.is_authenticated %}
+              <td>
+                <a href="{% url 'editar_tecnico' tecnico.id %}">Editar</a> |
+                <a href="{% url 'excluir_tecnico' tecnico.id %}">Excluir</a>
+              </td>
+            {% endif %}
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </main>
+{% endblock %}

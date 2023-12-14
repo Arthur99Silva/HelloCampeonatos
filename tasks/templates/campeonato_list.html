@@ -1,0 +1,37 @@
+{% extends 'home.html' %}
+
+{% block content %}
+  <main class="container mt-5">
+    <h1 class="text-center">Lista de Campeonatos</h1>
+
+    <table class="table mt-3">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Nome</th>
+          <th>Ano</th>
+          <th>Série</th>
+          {% if user.is_authenticated %}
+          <th>Ações<th>
+          {% endif %}
+        </tr>
+      </thead>
+      <tbody>
+        {% for campeonato in campeonato_list %}
+          <tr>
+            <td>{{ campeonato.id }}</td>
+            <td>{{ campeonato.nome }}</td>
+            <td>{{ campeonato.ano }}</td>
+            <td>{{ campeonato.serie }}</td>
+            {% if user.is_authenticated %}
+              <td>
+                <a href="{% url 'editar_campeonato' campeonato.id %}">Editar</a> |
+                <a href="{% url 'excluir_campeonato' campeonato.id %}">Excluir</a>
+              </td>
+            {% endif %}
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </main>
+{% endblock %}
