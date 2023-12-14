@@ -11,3 +11,8 @@ Passo a passo p/executar:
 5 - Instale o Django -> pip install django
 6 - Baixe 2 bibliotecas ->  pip install django-role-permissions e pip install django-extensions
 7 - Pronto agora é só executar -> python manage.py runserver
+
+Tela ininial:
+
+
+![HelloCampeonatos](https://github.com/Arthur99Silva/HelloCampeonatos/assets/51514914/44e727d8-a8e6-4c17-b878-7e3adc872f91)
