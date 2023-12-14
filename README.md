@@ -1,7 +1,5 @@
 # HelloCampeonatos
-Site básico com banco de dados para um campeonato de futebol.
-
-Esse projeto utilza Python, Django, HTML, CSS, HeidiSQL, e a extensão do Visual Code Studio SQLite.
+Projeto de site básico com banco de dados para um campeonato de futebol feito usando Python, Django, HTML, CSS, HeidiSQL, e a extensão do Visual Code Studio SQLite.
 Baixe o arquivo HelloCampeonatos.zip.
 
 Passo a passo p/executar:
